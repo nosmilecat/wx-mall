@@ -14,15 +14,13 @@ Page({
         getCodeButtonText: '获取验证码'
     },
 
-    onShow: function () {
-    },
+    onShow: function() {},
 
-    onLoad: function () {
+    onLoad: function() {
         var that = this
-        that.setData({userInfo: app.globalData.userInfo})
+        that.setData({ userInfo: app.globalData.userInfo })
 
-        if (app.globalData.token) {
-        } else {
+        if (app.globalData.token) {} else {
             var token = wx.getStorageSync('userToken')
             if (token) {
                 app.globalData.token = token
@@ -31,7 +29,7 @@ Page({
 
     },
 
-    bindCheckMobile: function (mobile) {
+    bindCheckMobile: function(mobile) {
         if (!mobile) {
             wx.showModal({
                 title: '错误',
@@ -49,24 +47,24 @@ Page({
         return true
     },
 
-    bindGetPassCode: function (e) {
+    bindGetPassCode: function(e) {
         var that = this
-        that.setData({disableGetMobileCode: true})
+        that.setData({ disableGetMobileCode: true })
     },
 
-    bindInputMobile: function (e) {
+    bindInputMobile: function(e) {
         this.setData({
             mobile: e.detail.value,
         })
     },
 
-    countDownPassCode: function () {
+    countDownPassCode: function() {
         if (!this.bindCheckMobile(this.data.mobile)) {
             return
         }
-        util.request(api.SmsCode, {phone: this.data.mobile}, 'POST', 'application/json')
-            .then(function (res) {
-                if (res.errno == 0) {
+        util.request(api.SmsCode, { phone: this.data.mobile }, 'POST', 'application/json')
+            .then(function(res) {
+                if (res.code === 200) {
                     wx.showToast({
                         title: '发送成功',
                         icon: 'success',
@@ -74,7 +72,7 @@ Page({
                     })
                     var pages = getCurrentPages()
                     var i = 60;
-                    var intervalId = setInterval(function () {
+                    var intervalId = setInterval(function() {
                         i--
                         if (i <= 0) {
                             pages[pages.length - 1].setData({
@@ -102,7 +100,7 @@ Page({
 
     },
 
-    bindLoginMobilecode: function (e) {
+    bindLoginMobilecode: function(e) {
         var mobile = this.data.mobile;
         if (!this.bindCheckMobile(mobile)) {
             return
@@ -115,9 +113,9 @@ Page({
             icon: 'loading',
             duration: 5000
         })
-        util.request(api.BindMobile, {mobile_code: e.detail.value.code, mobile: mobile}, "POST", "application/json")
-            .then(function (res) {
-                if (res.errno === 0) {
+        util.request(api.BindMobile, { mobile_code: e.detail.value.code, mobile: mobile }, "POST", "application/json")
+            .then(function(res) {
+                if (res.code === 200) {
                     wx.showModal({
                         title: '提示',
                         content: '操作成功',

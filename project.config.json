@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.0",
+	"libVersion": "2.11.0",
 	"appid": "wx69bb507689a4d602",
 	"projectname": "wx-mall",
 	"simulatorType": "wechat",

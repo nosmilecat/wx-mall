@@ -21,11 +21,11 @@ function formatNumber(n) {
 /**
  * 封封微信的的request
  */
-function request(url, data = {}, method = "POST", header = "application/x-www-form-urlencoded") {
+function request(url, data = {}, method = "POST", header = "application/json") {
     wx.showLoading({
         title: '加载中...',
     });
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         wx.request({
             url: url,
             data: data,
@@ -34,11 +34,11 @@ function request(url, data = {}, method = "POST", header = "application/x-www-fo
                 'Content-Type': header,
                 'X-Nideshop-Token': wx.getStorageSync('token')
             },
-            success: function (res) {
+            success: function(res) {
                 wx.hideLoading();
                 if (res.statusCode == 200) {
 
-                    if (res.data.errno == 401) {
+                    if (res.data.code == 401) {
                         wx.navigateTo({
                             url: '/pages/auth/btnAuth/btnAuth',
                         })
@@ -50,7 +50,7 @@ function request(url, data = {}, method = "POST", header = "application/x-www-fo
                 }
 
             },
-            fail: function (err) {
+            fail: function(err) {
                 reject(err)
             }
         })
@@ -61,12 +61,12 @@ function request(url, data = {}, method = "POST", header = "application/x-www-fo
  * 检查微信会话是否过期
  */
 function checkSession() {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         wx.checkSession({
-            success: function () {
+            success: function() {
                 resolve(true);
             },
-            fail: function () {
+            fail: function() {
                 reject(false);
             }
         })
@@ -77,16 +77,16 @@ function checkSession() {
  * 调用微信登录
  */
 function login() {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         wx.login({
-            success: function (res) {
+            success: function(res) {
                 if (res.code) {
                     resolve(res);
                 } else {
                     reject(res);
                 }
             },
-            fail: function (err) {
+            fail: function(err) {
                 reject(err);
             }
         });
@@ -95,17 +95,10 @@ function login() {
 
 function redirect(url) {
 
-    //判断页面是否需要登录
-    if (false) {
-        wx.redirectTo({
-            url: '/pages/auth/login/login'
-        });
-        return false;
-    } else {
-        wx.redirectTo({
-            url: url
-        });
-    }
+    wx.redirectTo({
+        url: url
+    });
+
 }
 
 function showErrorToast(msg) {
@@ -130,5 +123,3 @@ module.exports = {
     checkSession,
     login,
 }
-
-

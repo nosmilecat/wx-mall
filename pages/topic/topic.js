@@ -5,47 +5,47 @@ Page({
     data: {
         // text:"这是一个页面"
         topicList: [],
-        page: 1,
+        current: 1,
         size: 10,
         count: 0,
         scrollTop: 0,
         showPage: false
     },
-    onLoad: function (options) {
+    onLoad: function(options) {
         // 页面初始化 options为页面跳转所带来的参数
         this.getTopic();
 
     },
-    onReady: function () {
+    onReady: function() {
         // 页面渲染完成
     },
-    onShow: function () {
+    onShow: function() {
         // 页面显示
     },
-    onHide: function () {
+    onHide: function() {
         // 页面隐藏
     },
-    onUnload: function () {
+    onUnload: function() {
         // 页面关闭
     },
-    nextPage: function (event) {
+    nextPage: function(event) {
         var that = this;
-        if (this.data.page+1 > that.data.count / that.data.size) {
+        if (this.data.current + 1 > that.data.count / that.data.size) {
             return true;
         }
 
-        
+
         that.setData({
-            "page": parseInt(that.data.page) + 1
+            "current": parseInt(that.data.current) + 1
         });
 
         this.getTopic();
-        
+
     },
-    getTopic: function(){
-       
+    getTopic: function() {
+
         let that = this;
-         that.setData({
+        that.setData({
             scrollTop: 0,
             showPage: false,
             topicList: []
@@ -57,28 +57,29 @@ Page({
             duration: 2000
         });
 
-        util.request(api.TopicList, { page: that.data.page, size: that.data.size }).then(function (res) {
-          if (res.errno === 0) {
+        util.request(api.TopicList, { current: that.data.current, size: that.data.size }).then(function(res) {
+            console.log(res)
+            if (res.code === 200) {
 
-            that.setData({
-              scrollTop: 0,
-              topicList: res.data.data,
-              showPage: true,
-              count: res.data.count
-            });
-          }
-          wx.hideToast();
+                that.setData({
+                    scrollTop: 0,
+                    topicList: res.result.rows,
+                    showPage: true,
+                    count: res.result.total
+                });
+            }
+            wx.hideToast();
         });
-        
+
     },
-    prevPage: function (event) {
-        if (this.data.page <= 1) {
+    prevPage: function(event) {
+        if (this.data.current <= 1) {
             return false;
         }
 
         var that = this;
         that.setData({
-            "page": parseInt(that.data.page) - 1
+            "current": parseInt(that.data.current) - 1
         });
         this.getTopic();
     }

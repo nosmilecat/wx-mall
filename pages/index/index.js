@@ -30,45 +30,45 @@ Page({
         let that = this;
         var data = new Object();
         util.request(api.IndexUrlNewGoods).then(function(res) {
-            if (res.errno === 0) {
-                data.newGoods = res.data.newGoodsList
+            if (res.code === 200) {
+                data.newGoods = res.result.newGoodsList
                 that.setData(data);
             }
         });
         util.request(api.IndexUrlHotGoods).then(function(res) {
-            if (res.errno === 0) {
-                data.hotGoods = res.data.hotGoodsList
+            if (res.code === 200) {
+                data.hotGoods = res.result.hotGoodsList
                 that.setData(data);
             }
         });
         util.request(api.IndexUrlTopic).then(function(res) {
-            if (res.errno === 0) {
-                data.topics = res.data.topicList
+            if (res.code === 200) {
+                data.topics = res.result.topicList
                 that.setData(data);
             }
         });
         util.request(api.IndexUrlBrand).then(function(res) {
-            if (res.errno === 0) {
-                data.brand = res.data.brandList
+            if (res.code === 200) {
+                data.brand = res.result.brandList
                 that.setData(data);
             }
         });
         util.request(api.IndexUrlCategory).then(function(res) {
-            if (res.errno === 0) {
-                data.floorGoods = res.data.categoryList
+            if (res.code === 200) {
+                data.floorGoods = res.result.categoryList
                 that.setData(data);
             }
         });
         util.request(api.IndexUrlBanner).then(function(res) {
 
-            if (res.errno === 0) {
-                data.banner = res.data.banner
+            if (res.code === 200) {
+                data.banner = res.result.banner
                 that.setData(data);
             }
         });
         util.request(api.IndexUrlChannel).then(function(res) {
-            if (res.errno === 0) {
-                data.channel = res.data.channel
+            if (res.code === 200) {
+                data.channel = res.result.channel
                 that.setData(data);
             }
         });
