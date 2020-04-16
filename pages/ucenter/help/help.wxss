@@ -12,3 +12,9 @@ page ,.container{
   font-size: 35rpx;
   color: #009944;
 }
+.list-cell-bd {
+  background: #fff;
+  padding: 0 30rpx;
+  line-height: 80rpx;
+
+}

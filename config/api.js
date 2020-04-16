@@ -71,6 +71,6 @@ module.exports = {
     GoodsCouponList: API_BASE_URL + 'coupon/listByGoods', // 商品优惠券列表   
     OrderQuery: API_BASE_URL + 'pay/query', //微信查询订单状态
 
-    HelpTypeList: API_BASE_URL + 'helpissue/typeList', //查看帮助类型列表
-    HelpIssueList: API_BASE_URL + 'helpissue/issueList', //查看问题列表
+    HelpIssueList: API_BASE_URL + 'helpissue/issueList', //查看帮助类型列表
+    HelpIssueInfo: API_BASE_URL + 'helpissue/issueInfo', //查看问题列表
 };

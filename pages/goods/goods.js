@@ -143,7 +143,7 @@ Page({
             return v.valueId;
         });
 
-        return checkedValue.join('_');
+        return checkedValue.join(',');
     },
     changeSpecInfo: function() {
         let checkedNameValue = this.getCheckedSpecValue();

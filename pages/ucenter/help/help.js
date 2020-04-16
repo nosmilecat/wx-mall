@@ -8,7 +8,7 @@ Page({
     },
     getHelpList() {
         let that = this;
-        util.request(api.HelpTypeList, {}).then(function(res) {
+        util.request(api.HelpIssueList, {}).then(function(res) {
             if (res.code === 200) {
                 that.setData({
                     helpList: res.result

@@ -4,14 +4,14 @@ var app = getApp()
     // pages/ucenter/help/help.js
 Page({
     data: {
-        helpList: []
+        helpIssueInfo: []
     },
     getHelpList(id) {
         let that = this;
-        util.request(api.HelpIssueList, { type_id: id }).then(function(res) {
+        util.request(api.HelpIssueInfo, { id }).then(function(res) {
             if (res.code === 200) {
                 that.setData({
-                    helpList: res.result
+                    helpIssueInfo: res.result
                 })
             }
         });
