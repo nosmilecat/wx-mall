@@ -113,7 +113,7 @@ Page({
         if (app.globalData.userCoupon == 'USE_COUPON') {
             this.setData({
                 couponDesc: app.globalData.courseCouponCode.name,
-                couponId: app.globalData.courseCouponCode.user_coupon_id,
+                couponId: app.globalData.courseCouponCode.userCouponId,
             })
         } else if (app.globalData.userCoupon == 'NO_USE_COUPON') {
             this.setData({
