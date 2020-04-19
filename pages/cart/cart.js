@@ -67,7 +67,7 @@ Page({
         let that = this;
 
         if (!this.data.isEditCart) {
-            util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].product_id, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }, "POST", "application/json").then(function(res) {
+            util.request(api.CartChecked, { productIds: that.data.cartGoods[itemIndex].productId, isChecked: that.data.cartGoods[itemIndex].checked ? 0 : 1 }, "POST", "application/json").then(function(res) {
                 if (res.code === 200) {
                     that.setData({
                         cartGoods: res.result.cartList,
@@ -251,7 +251,7 @@ Page({
 
         productIds = productIds.map(function(element, index, array) {
             if (element.checked == true) {
-                return element.product_id;
+                return element.productId;
             }
         });
 

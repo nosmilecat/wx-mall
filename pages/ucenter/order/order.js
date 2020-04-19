@@ -44,7 +44,7 @@ Page({
         util.request(api.OrderList, { current: that.data.current, size: that.data.size }).then(function(res) {
             if (res.code === 200) {
                 that.setData({
-                    orderList: that.data.orderList.concat(res.result.data),
+                    orderList: that.data.orderList.concat(res.result.rows),
                     current: that.data.current + 1,
                     totalPages: res.result.totalPages
                 });
@@ -57,7 +57,7 @@ Page({
         let orderIndex = event.currentTarget.dataset.orderIndex;
         let order = that.data.orderList[orderIndex];
         wx.redirectTo({
-            url: '/pages/pay/pay?orderId=' + order.id + '&actualPrice=' + order.actual_price,
+            url: '/pages/pay/pay?orderId=' + order.id + '&actualPrice=' + order.actualPrice,
         })
     },
     onReady: function() {

@@ -175,3 +175,7 @@ page{
   font-size: 30rpx;
   color: #b4282d;
 }
+
+.no-data {
+    text-align: center;
+}

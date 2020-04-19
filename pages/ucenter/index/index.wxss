@@ -74,7 +74,6 @@ page{
     width: 100%;
     height: auto;
     overflow: hidden;
-    background: #fff;
 }
 
 .user-menu .item{
@@ -84,6 +83,7 @@ page{
     border-right: 1px solid rgba(0,0,0,.15);
     border-bottom: 1px solid rgba(0,0,0,.15);
     text-align: center;
+    background: #fff;
 }
 
 .user-menu .item .a{

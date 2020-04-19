@@ -33,7 +33,6 @@ Page({
         });
     },
     selectAddress(event) {
-
         try {
             wx.setStorageSync('addressId', event.currentTarget.dataset.addressId);
         } catch (e) {

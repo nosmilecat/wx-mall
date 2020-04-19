@@ -23,8 +23,7 @@ Page({
         buyType: ''
     },
     onLoad: function(options) {
-        console.log('111', options)
-            // 页面初始化 options为页面跳转所带来的参数
+        // 页面初始化 options为页面跳转所带来的参数
         if (options.isBuy != null) {
             this.data.isBuy = options.isBuy
         }
@@ -36,9 +35,9 @@ Page({
 
     getCheckoutInfo: function() {
         let that = this;
-        var url = api.CartCheckout
         let buyType = this.data.isBuy ? 'buy' : 'cart'
-        util.request(url, { addressId: that.data.addressId, couponId: that.data.couponId, type: buyType }).then(function(res) {
+        var url = api.CartCheckout + `?couponId=${that.data.couponId}&type=${buyType}&addressId=${that.data.addressId}`
+        util.request(url).then(function(res) {
             if (res.code === 200) {
                 that.setData({
                     checkedGoodsList: res.result.checkedGoodsList,
@@ -92,7 +91,6 @@ Page({
         wx.showLoading({
             title: '加载中...',
         })
-        this.getCheckoutInfo();
 
         try {
             var addressId = wx.getStorageSync('addressId');
@@ -104,6 +102,8 @@ Page({
         } catch (e) {
             // Do something when catch error
         }
+
+        this.getCheckoutInfo();
     },
 
     /**
@@ -148,9 +148,9 @@ Page({
             util.showErrorToast('请选择收货地址');
             return false;
         }
-        util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId, type: this.data.buyType }, 'POST', 'application/json').then(res => {
+        util.request(api.OrderSubmit, { addressId: this.data.addressId, couponId: this.data.couponId, type: this.data.buyType, postscript: '' }, 'POST', 'application/json').then(res => {
             if (res.code === 200) {
-                const orderId = res.result.orderInfo.id;
+                const orderId = res.result.data.orderInfo.id;
                 pay.payOrder(parseInt(orderId)).then(res => {
                     wx.redirectTo({
                         url: '/pages/payResult/payResult?status=1&orderId=' + orderId

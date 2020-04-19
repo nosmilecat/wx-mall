@@ -14,8 +14,8 @@ Page({
         categoryId: 0,
         currentSortType: 'default',
         currentSortOrder: 'desc',
-        page: 1,
-        size: 1000
+        current: 1,
+        size: 100
     },
     getData: function() {
         let that = this;
@@ -31,11 +31,11 @@ Page({
     getGoodsList() {
         var that = this;
 
-        util.request(api.GoodsList, { isNew: 1, page: that.data.page, size: that.data.size, order: that.data.currentSortOrder, sort: that.data.currentSortType, categoryId: that.data.categoryId })
+        util.request(api.GoodsList, { isNew: 1, current: that.data.current, size: that.data.size, order: that.data.currentSortOrder, sort: that.data.currentSortType, categoryId: that.data.categoryId })
             .then(function(res) {
                 if (res.code === 200) {
                     that.setData({
-                        goodsList: res.result.goodsList,
+                        goodsList: res.result.goodsList.rows,
                         filterCategory: res.result.filterCategory
                     });
                 }
